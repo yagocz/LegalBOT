@@ -1,0 +1,2 @@
+# LegalBot Backend
+
