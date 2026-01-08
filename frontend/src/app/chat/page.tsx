@@ -596,13 +596,13 @@ export default function ChatPage() {
       }
 
       setMessages(prev => [...prev, assistantMessage]);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error calling AI backend:', error);
       // Fallback to demo response if API fails
       const demoResponse = getDemoResponse(queryText);
 
       let errorMessage = 'Error de conexión con el servidor. (Intenta reiniciar el backend)';
-      if (error?.message) {
+      if (error instanceof Error) {
         errorMessage = `Error: ${error.message}`;
       }
 
@@ -634,9 +634,10 @@ export default function ChatPage() {
       const result = await uploadUserDocument(file, authToken || undefined);
       setUserContext(result.extracted_text);
       setUploadedFileName(result.filename || file.name);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error uploading document:', error);
-      alert(error.message || 'Error al subir el documento');
+      const message = error instanceof Error ? error.message : 'Error al subir el documento';
+      alert(message);
     } finally {
       setIsUploading(false);
     }

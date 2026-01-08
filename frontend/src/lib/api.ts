@@ -9,11 +9,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 // TIPOS
 // ═══════════════════════════════════════════════════════════════
 
-interface ChatMessageRequest {
-  content: string;
-  conversation_id?: string;
-}
-
 interface LegalSource {
   text: string;
   law: string;
@@ -137,7 +132,7 @@ export async function sendChatMessage(
   userContext?: string,
   mode: string = 'advisor'
 ): Promise<ChatResponse> {
-  const body: any = {
+  const body: Record<string, string | undefined> = {
     content,
     user_context: userContext,
     mode: mode
@@ -163,7 +158,7 @@ export async function uploadUserDocument(file: File, token?: string) {
   const formData = new FormData();
   formData.append('file', file);
 
-  const headers: any = {};
+  const headers: Record<string, string> = {};
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
