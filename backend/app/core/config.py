@@ -14,7 +14,16 @@ class Settings(BaseSettings):
     PORT: int = 8000
     
     # Database
-    DATABASE_URL: str = "postgresql+asyncpg://user:password@localhost:5432/legalbot"
+    DATABASE_URL: str = "sqlite+aiosqlite:///./legalbot.db"
+    
+    @property
+    def ASYNC_DATABASE_URL(self) -> str:
+        """Ajusta la URL para compatibilidad con asyncpg"""
+        if self.DATABASE_URL.startswith("postgres://"):
+            return self.DATABASE_URL.replace("postgres://", "postgresql+asyncpg://", 1)
+        elif self.DATABASE_URL.startswith("postgresql://"):
+            return self.DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
+        return self.DATABASE_URL
     
     # Redis
     REDIS_URL: str = "redis://localhost:6379"
