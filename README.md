@@ -40,7 +40,7 @@ LegalBot es una plataforma de vanguardia que ofrece asesoría legal especializad
 ## ☁️ Despliegue
 
 La aplicación se encuentra desplegada y operativa:
-- **Frontend:** [legal-bot.vercel.app](https://legal-bot.vercel.app)
+- **Frontend:** [legal-bot.vercel.app](https://legal-bot-two.vercel.app/)
 - **Backend:** [legalbot-dpm4.onrender.com](https://legalbot-dpm4.onrender.com)
 
 ---
